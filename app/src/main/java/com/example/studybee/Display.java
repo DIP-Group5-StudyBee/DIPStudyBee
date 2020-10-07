@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.style.AlignmentSpan;
 
@@ -34,8 +35,8 @@ public class Display extends AppCompatActivity implements OnTaskCompleted{
     String status;
     String faculty;
     String email;
+    int id;
     EditText et_firstName;
-    SearchView search;
     String msgType;
     Button SButton;
     ImageButton NButton;
@@ -49,19 +50,19 @@ public class Display extends AppCompatActivity implements OnTaskCompleted{
     TextView[] textViews= new TextView[6];
 
     // Set host address of the WAMP Server
-    public static final String HOST = "192.168.1.108"; //use your IP address
+    public static final String HOST = "10.27.240.3"; //use your IP address
 
     // Set virtual directory of the host website
     public static final String DIR = "myproject";
 
     // Set request ID for all HTTP requests
-    private static final String REQ_DOWNLOAD = "1005";
+    private static final String REQ_DOWNLOAD = "1004";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_profile);
-
+        setContentView(R.layout.friend_page);
+    
         //String jsonString = convertToJSON();
         //Toast.makeText(getApplicationContext(), firstname, Toast.LENGTH_LONG).show();
         //access database network
@@ -92,6 +93,8 @@ public class Display extends AppCompatActivity implements OnTaskCompleted{
             @Override
             public void onClick(View view) {
                 String data = textViews[1].getText().toString();
+                //String stringid[] = id.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
+                //int tid = Integer.parseInt(stringid[1]);
                 String tname[] = firstname.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
                 String tmail [] = email.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
                 String tfacu [] = faculty.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
@@ -107,6 +110,8 @@ public class Display extends AppCompatActivity implements OnTaskCompleted{
             @Override
             public void onClick(View view) {
                 String data = textViews[2].getText().toString();
+                //String stringid[] = id.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
+                //int tid = Integer.parseInt(stringid[2]);
                 String tname[] = firstname.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
                 String tmail [] = email.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
                 String tfacu [] = faculty.replaceAll("\\[","").replaceAll("\\]","").replaceAll("\"","").replaceAll("\"","").split(",");
@@ -149,6 +154,8 @@ public class Display extends AppCompatActivity implements OnTaskCompleted{
             jsonText.object();
             jsonText.key("type");
             jsonText.value(msgType);
+            jsonText.key("id");
+            jsonText.value(id);
             jsonText.key("username");
             jsonText.value(username);
             jsonText.key("firstname");
@@ -169,23 +176,23 @@ public class Display extends AppCompatActivity implements OnTaskCompleted{
 
 public void retrieveFromJSON(String message) {
         try {
-            int i =0;
-            JSONObject jsonObject = new JSONObject(message);
-            msgType = jsonObject.getString("type");
-            if (msgType.equals(REQ_DOWNLOAD)) {
-            status = jsonObject.getString("status");
-            if (status.equals("OK")) {
+        JSONObject jsonObject = new JSONObject(message);
+        msgType = jsonObject.getString("type");
+        if (msgType.equals(REQ_DOWNLOAD)) {
+        status = jsonObject.getString("status");
+        if (status.equals("OK")) {
+           // id = jsonObject.getString("id");
             username = jsonObject.getString("username");
             firstname = jsonObject.getString("firstname");
             faculty = jsonObject.getString("faculty");
             email = jsonObject.getString("email");
-            }
+        }
         }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            }
-    }
+        e.printStackTrace();
+        }
+        }
     @Override
     public void onTaskCompleted(String response) {
 
@@ -210,6 +217,9 @@ public void retrieveFromJSON(String message) {
                     textViews[k].setText("");
 
                 }
+                Drawable defsmall = getResources().getDrawable(R.drawable.defsmall1);
+                ImageButton image = (ImageButton)findViewById(R.id.imageButtonA);
+                image.setImageDrawable(defsmall);
                 NButton.setVisibility(View.VISIBLE);
                 NButton1.setVisibility(View.INVISIBLE);
                 NButton2.setVisibility(View.INVISIBLE);
@@ -220,12 +230,18 @@ public void retrieveFromJSON(String message) {
                     textViews[k].setText("");
 
                 }
+                Drawable defsmall = getResources().getDrawable(R.drawable.defsmall1);
+                ImageButton image = (ImageButton)findViewById(R.id.imageButtonA);
+                image.setImageDrawable(defsmall);
                 NButton.setVisibility(View.VISIBLE);
                 NButton1.setVisibility(View.VISIBLE);
                 NButton2.setVisibility(View.INVISIBLE);
             }
             if(comma ==3)
             {
+                Drawable defsmall = getResources().getDrawable(R.drawable.defsmall1);
+                ImageButton image = (ImageButton)findViewById(R.id.imageButtonA);
+                image.setImageDrawable(defsmall);
                 NButton.setVisibility(View.VISIBLE);
                 NButton1.setVisibility(View.VISIBLE);
                 NButton2.setVisibility(View.VISIBLE);
@@ -244,7 +260,7 @@ public void retrieveFromJSON(String message) {
             txtDisplay2.setText(fusername[2]);//display text*/
 
         } else {
-        Toast.makeText(getApplicationContext(), username, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "No match found.", Toast.LENGTH_SHORT).show();
         return;
         }
 

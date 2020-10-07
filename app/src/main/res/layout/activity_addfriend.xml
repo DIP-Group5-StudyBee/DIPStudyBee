@@ -50,15 +50,16 @@
                 android:textSize="10dp"
                 tools:text="@tools:sample/cities" />
 
-<!--            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--                android:id="@+id/profile_image"-->
-<!--                android:layout_width="130dp"-->
-<!--                android:layout_height="130dp"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:src="@drawable/person"-->
-<!--                app:civ_border_color="#FF000000"-->
-<!--                app:civ_border_width="0dp" />-->
+           <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/defprofilepicture"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0dp"
+                tools:ignore="MissingClass" />
 
         </RelativeLayout>
 

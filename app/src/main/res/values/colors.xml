@@ -9,4 +9,10 @@
     <color name="black">#000000</color>
     <color name="button_selectorcolor">#9E9E9E</color>
     <color name="white_greyish">#EEEEEE</color>
+
+    <!--    newly added colours -->
+    <color name="bottom_nav_bg">#93680c</color>
+    <color name="profile_top_bg">#fff4c1</color>
+    <color name="profile_navbar">#decf83</color>
+    <color name="tint">#ddd278</color>
 </resources>
